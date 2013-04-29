@@ -1,8 +1,14 @@
 @import "bootstrap";
-
+@import "bootstrap-responsive";
 /* mixins, variables, etc. */
 
 $grayMediumLight: #eaeaea;
+
+@mixin box_sizing {
+  -moz-box-sizing: border-box; 
+  -webkit-box-sizing: border-box; 
+  box-sizing: border-box;
+}
 
 /* universal */
 
@@ -29,6 +35,46 @@ textarea {
   }
 }
 
+.control-group1
+{
+  float:left;
+  margin-top:50px;
+  margin-left:20px;
+}
+
+.controls1
+{
+  width:500px;
+}
+.pass
+{
+  margin-top:20px;
+  margin-left:30px;
+}
+
+
+.resend-password-wrapper {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px 6px 6px 6px;
+    height: 259px;
+}
+
+.forget-image
+{
+  float:left;
+  width:200px;
+  height:200px;
+  background:#ffffff url('../images/forgot-password income tax india.gov.in.gif') no-repeat; 
+  margin-left:30px; 
+}
+.forget-image1
+{
+  float:left;
+  width:200px;
+  height:200px;
+  background:#ffffff url('../images/password-icon.jpg') no-repeat; 
+  margin-left:30px; 
+}
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -75,28 +121,96 @@ p {
   }
 }
 
-/* footer */
 
-footer {
+
+/* miscellaneous */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
   margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid $grayMediumLight;
-  color: $grayLight;
+  @include box_sizing;
+}
+
+/* sidebar */
+
+aside {
+  section {
+    padding: 10px 0;
+    border-top: 1px solid $grayLighter;
+    &:first-child {
+      border: 0;
+      padding-top: 0;
+    }
+    span {
+      display: block;
+      margin-bottom: 3px;
+      line-height: 1;
+    }
+    h1 {
+      font-size: 1.6em;
+      text-align: left;
+      letter-spacing: -1px;
+      margin-bottom: 3px;
+    }
+  }
+}
+
+.stats {
+  overflow: auto;
   a {
-    color: $gray;
-    &:hover { 
-      color: $grayDarker;
+    float: left;
+    padding: 0 10px;
+    border-left: 1px solid $grayLighter;
+    color: gray;
+    &:first-child {
+      padding-left: 0;
+      border: 0;
     }
-  }  
-  small { 
-    float: left; 
+    &:hover {
+      text-decoration: none;
+      color: $blue;
+    }
   }
+  strong {
+    display: block;
+  }
+}
+
+.user_avatars {
+  overflow: auto;
+  margin-top: 10px;
+  .gravatar {
+    margin: 1px 1px;
+  }
+}
+
+.gravatar {
+  float: left;
+  margin-right: 10px;
+}
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  padding: 4px;
+  height: auto !important;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+#error_explanation {
+  color: #f00;
   ul {
-    float: right;
     list-style: none;
-    li {
-      float: left;
-      margin-left: 10px;
-    }
+    margin: 0 0 18px 0;
   }
+}
+
+.field_with_errors {
+  @extend .control-group;
+  @extend .error;
 }
