@@ -1,0 +1,6 @@
+<% if @prayer_items.any? %>
+  <ol class="prayers">
+    <%= render partial: 'shared/prayer_item', collection: @prayer_items %>
+  </ol>
+  <%= will_paginate @prayer_items %>
+<% end %>

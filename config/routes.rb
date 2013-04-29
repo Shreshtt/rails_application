@@ -1,8 +1,8 @@
 Ginfy::Application.routes.draw do
   root to: 'static_pages#home'
-  resources :prayers
   resources :users
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions,   only: [:new, :create, :destroy]
+  resources :prayers, only: [:create, :destroy]
   match '/help',    to: 'static_pages#help'
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'  

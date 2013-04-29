@@ -1,0 +1,11 @@
+<li>
+  <span class="content"><%= prayer.content %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(prayer.created_at) %> ago.
+  </span>
+  <% if current_user?(prayer.user) %>
+    <%= link_to "delete", prayer, method: :delete,
+                                     data: { confirm: "You sure?" },
+                                     title: prayer.content %>
+  <% end %>
+</li>

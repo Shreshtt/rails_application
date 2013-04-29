@@ -1,4 +1,6 @@
 class PrayersController < ApplicationController
+  before_filter :signed_in_user, only: [:create, :destroy]
+  before_filter :correct_user,   only: :destroy
   # GET /prayers
   # GET /prayers.json
   def index
@@ -40,14 +42,16 @@ class PrayersController < ApplicationController
   # POST /prayers
   # POST /prayers.json
   def create
-    @prayer = Prayer.new(params[:prayer])
+    @prayer = current_user.prayers.build(params[:prayer])
 
     respond_to do |format|
       if @prayer.save
-        format.html { redirect_to @prayer, notice: 'Prayer was successfully created.' }
+        flash[:success] = "Prayer created!"
+        format.html { redirect_to root_url, notice: 'Prayer was successfully created.' }
         format.json { render json: @prayer, status: :created, location: @prayer }
       else
-        format.html { render action: "new" }
+        @feed_items = []
+        format.html { render action: "static_pages/home" }
         format.json { render json: @prayer.errors, status: :unprocessable_entity }
       end
     end
@@ -80,4 +84,11 @@ class PrayersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+    def correct_user
+      @prayer = current_user.prayers.find_by_id(params[:id])
+      redirect_to root_url if @prayer.nil?
+    end  
 end
